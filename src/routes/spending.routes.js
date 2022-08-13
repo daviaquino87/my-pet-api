@@ -7,6 +7,16 @@ routes.use(express.json());
 
 const spendings = []
 
+function getBalance(statement){
+    const balance = statement.reduce((acc,operation) => {
+            return acc + operation.amount;
+    },0)
+
+    return balance;
+}
+
+
+
 routes.post('/spending',(request,response) => {
     const {date,amount} = request.body;
 
@@ -21,8 +31,14 @@ routes.post('/spending',(request,response) => {
     return response.status(201).send();
 });
 
-routes.get('/spending',(request,response) => {
+routes.get('/reports',(request,response) => {
     return response.status(201).json({spendings:spendings});
+});
+
+routes.get('/balance',(request,response) => {
+
+    const balance = getBalance(spendings);
+    return response.json({balance:balance})
 });
 
 
