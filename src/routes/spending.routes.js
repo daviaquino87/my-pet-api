@@ -1,45 +1,39 @@
-const { application } = require('express');
 const express = require('express');
 const routes = express.Router();
 const { v4: uuidv4 } = require('uuid');
+const { createClient } = require("@supabase/supabase-js");
+require('dotenv').config();
 
 routes.use(express.json());
 
-const spendings = []
+const supabase = createClient(process.env.URL, process.env.KEY);
 
-function getBalance(statement){
-    const balance = statement.reduce((acc,operation) => {
-            return acc + operation.amount;
-    },0)
+routes.post('/spending', async (request, response) => {
 
-    return balance;
-}
+    const {price, date} = request.body
 
-
-
-routes.post('/spending',(request,response) => {
-    const {date,amount} = request.body;
-
-    const purchase = {
-        id: uuidv4(),
-        date:date,
-        amount: amount
+    if(!date){
+        date: new Date()
     }
 
-    spendings.push(purchase);
+    const data  = await supabase
+    .from('spending')
+    .insert({
+        price: price,
+        date: date
+    })
 
-    return response.status(201).send();
+    return response.status(201).json(data);
 });
 
-routes.get('/reports',(request,response) => {
-    return response.status(201).json({spendings:spendings});
+routes.get('/reports', async (request, response) => {
+
+    const { data: spending, error } = await supabase.from('spending').select('*')
+
+    return response.status(200).json(spending)
+
 });
 
-routes.get('/balance',(request,response) => {
-
-    const balance = getBalance(spendings);
-    return response.json({balance:balance})
-});
 
 
 module.exports = routes;
