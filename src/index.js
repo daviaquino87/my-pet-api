@@ -1,10 +1,10 @@
-const express = require('express');
-const { get } = require('./routes/spending.routes');
+const express = require("express");
+const { get } = require("./routes/spending.routes");
 const app = express();
-const routes = require('./routes/spending.routes');
+const routes = require("./routes/spending.routes");
 
-app.use(routes)
+app.use(routes);
 
-app.listen(3333, ()=>{
-    console.log('app on');
+app.listen(process.env.PORT || 3000, () => {
+  console.log("app on");
 });
