@@ -34,6 +34,7 @@ Aplicação para gerenciamento de gastos do mês com ração
 | :---------- | :--------- | :------------------------------------------ |
 | - -     | - - | **listagem**. Retorna todas as compras feitas |
 
+#### Retorna um balanço do valor compras
 
 ```http
   GET /balance
@@ -41,7 +42,7 @@ Aplicação para gerenciamento de gastos do mês com ração
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| - -     | - - | **informatico**. Retorna o balanço geral dos gastos |
+| - -     | - - | **informatico**. Retorna a soma geral dos gastos |
 
 
 
@@ -72,5 +73,9 @@ Importando e instalando dependências do projeto
 
 ```bash
  npm i 
+```
+
+```bash
+  npm run dev
 ```
     
