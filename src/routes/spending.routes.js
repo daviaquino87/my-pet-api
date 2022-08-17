@@ -4,15 +4,15 @@ const { v4: uuidv4 } = require("uuid");
 
 const {
   CreateSpendingController,
-} = require("../controller/CreateExpense/createSpendingController");
+} = require("../UseCases/CreateExpense/createSpendingController");
 
 const {
   ListSpendingController,
-} = require("../controller/ListExpense/listSpendingController");
+} = require("../UseCases/ListExpense/listSpendingController");
 
 const {
   BalancespendingController,
-} = require("../controller/SeeBalance/balanceSpendingController");
+} = require("../UseCases/SeeBalance/balanceSpendingController");
 
 const { supabase } = require("../database/Supabase");
 
