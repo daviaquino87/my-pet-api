@@ -6,7 +6,7 @@
 
 ## MyPet
 
-Aplicação para gerenciamento de gastos do mês com ração
+Aplicação para gerenciamento de gastos do mês com meu pet
 </div>
 
 
