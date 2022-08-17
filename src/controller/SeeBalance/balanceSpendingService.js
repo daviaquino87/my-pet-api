@@ -1,25 +1,25 @@
 const { supabase } = require("../../database/Supabase");
 
-class BalanceSpendigService {
+class BalanceSpendingService {
   async balanceService() {
     const { data: spendings, error } = await supabase
       .from("spending")
       .select("*");
 
     const values = [];
+    let somValues = 0;
 
     const sprice = spendings.map((spending) => {
       values.push(spending.price);
     });
 
-    var soma = values
-      .reduce(function (soma, i) {
-        return soma + i;
-      }, 0)
-      .toFixed(2);
+    let sumWithvalues = values.reduce(
+      (previousValue, currentValue) => previousValue + currentValue,
+      somValues
+    );
 
-    return soma;
+    return sumWithvalues;
   }
 }
 
-module.exports = { BalanceSpendigService };
+module.exports = { BalanceSpendingService };

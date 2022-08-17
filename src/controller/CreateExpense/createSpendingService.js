@@ -1,7 +1,7 @@
 const { supabase } = require("../../database/Supabase");
 
 class CreateSpendingService {
-  async createSpening(price, date) {
+  async createSpending(price, date) {
     const data = await supabase.from("spending").insert({
       price,
       date,
