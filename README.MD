@@ -42,7 +42,7 @@ Aplicação para gerenciamento de gastos do mês com meu pet
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| - -     | - - | **informatico**. Retorna a soma geral dos gastos |
+| - -     | - - | **informativo**. Retorna a soma geral dos gastos |
 
 
 
