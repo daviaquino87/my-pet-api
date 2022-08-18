@@ -55,9 +55,6 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 `KEY`
 
-`PORT`
-
-
 ## Referência
 
  - [Supabase -> ](https://supabase.com/docs)
