@@ -1,7 +1,7 @@
 
 
 <div align="center">
-<img src='./cache/img/image.jpg' style='align:center'>
+<img src='.github/img/image.jpg' style='align:center'>
 <br>
 
 ## MyPet
