@@ -2,6 +2,8 @@ const express = require("express");
 const routes = express.Router();
 const { v4: uuidv4 } = require("uuid");
 
+routes.use(express.json())
+
 const {
   CreateSpendingController,
 } = require("../UseCases/CreateExpense/createSpendingController");

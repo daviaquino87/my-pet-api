@@ -2,8 +2,8 @@ const { CreateSpendingService } = require("./createSpendingService");
 
 class CreateSpendingController {
   async createSpending(request, response) {
-    try {
-      let { price, date } = request.body;
+  try {
+      let { price,date } = request.body
 
       if (!date) {
         date = new Date();
@@ -11,9 +11,9 @@ class CreateSpendingController {
       const serviceCreate = new CreateSpendingService();
       const data = await serviceCreate.createSpending(price, date);
 
-      return response.status(201).json(data.body);
+      return response.status(201).json(data);
     } catch (err) {
-      return response.status(400).json({ err });
+      return response.status(400).json(err);
     }
   }
 }
