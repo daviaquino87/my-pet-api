@@ -68,7 +68,7 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 Importando e instalando dependências do projeto
 
 ```bash
-  git clone https://github.com/daviaquino87/myPet.git
+  git clone https://github.com/daviaquino87/MyPet-API.git
 ```
 
 ```bash
