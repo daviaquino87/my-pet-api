@@ -1,4 +1,4 @@
-const { supabase } = require("../../database/Supabase");
+const { supabase } = require("../../../../database/Supabase");
 
 class DeleteSpendingService {
   async deleteSpending(id) {

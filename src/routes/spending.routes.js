@@ -4,19 +4,19 @@ const { v4: uuidv4 } = require("uuid");
 
 const {
   CreateSpendingController,
-} = require("../UseCases/CreateExpense/createSpendingController");
+} = require("../Modules/spending/UseCases/CreateExpense/createSpendingController");
 
 const {
   ListSpendingController,
-} = require("../UseCases/ListExpense/listSpendingController");
+} = require("../Modules/spending/UseCases/ListExpense/listSpendingController");
 
 const {
   BalancespendingController,
-} = require("../UseCases/SeeBalance/balanceSpendingController");
+} = require("../Modules/spending/UseCases/SeeBalance/balanceSpendingController");
 
 const {
   DeleteSpending,
-} = require("../UseCases/DeleteSpending/deleteSpendingController");
+} = require("../Modules/spending/UseCases/DeleteSpending/deleteSpendingController");
 
 const { supabase } = require("../database/Supabase");
 const { Router } = require("express");
