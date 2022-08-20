@@ -1,20 +1,12 @@
 const express = require("express");
 const { supabase } = require("../database/Supabase");
+const {
+  CreateUserController,
+} = require("../Modules/user/UseCases/CreateUser/createUserControlle");
 const routes = express.Router();
 
-routes.post("/user", async (request, response) => {
-  const { email, pass } = request.body;
+const create = new CreateUserController();
 
-  let { user, error } = await supabase.auth.signUp({
-    email: email,
-    password: pass,
-  });
-
-  response.json({
-    status: "ok",
-    user,
-    error,
-  });
-});
+routes.post("/register", create.createUser);
 
 module.exports = routes;

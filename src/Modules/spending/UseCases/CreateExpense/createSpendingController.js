@@ -2,8 +2,8 @@ const { CreateSpendingService } = require("./createSpendingService");
 
 class CreateSpendingController {
   async createSpending(request, response) {
-  try {
-      let { price,date } = request.body
+    try {
+      let { price, date } = request.body;
 
       if (!date) {
         date = new Date();
