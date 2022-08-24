@@ -1,13 +1,12 @@
 const { supabase } = require("../../../../database/Supabase");
 
 class CreateUserService {
-  async createUser(name, email, password) {
-    const data = await supabase.from("users").insert({
-      name,
-      email,
-      password,
+  async createUser(email, password) {
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
     });
-    return data;
+    return user;
   }
 }
 
