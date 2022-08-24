@@ -7,9 +7,9 @@ class AutenticateUserController {
 
       const authService = new AutenticateUserService();
 
-      const user = await authService.autenticate(email, password);
-
-      return response.status(200).json(user);
+      const data = await authService.autenticate(email, password);
+      console.log("data:", data.token);
+      return response.status(200).json(data);
     } catch (err) {
       return response.status(400).json(err);
     }

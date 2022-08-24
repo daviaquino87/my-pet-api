@@ -5,7 +5,7 @@ const CreateUserService = require("./createUserService");
 class CreateUserController {
   async createUser(request, response) {
     try {
-      let { email, password } = request.body;
+      const { email, password } = request.body;
 
       if (password.length <= 6) {
         return response

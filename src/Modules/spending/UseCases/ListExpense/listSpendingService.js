@@ -1,10 +1,13 @@
 const { supabase } = require("../../../../database/Supabase");
 
 class ListSpendingService {
-  async listSpendingService() {
+  async listSpendingService(uuid) {
     const { data: spending, error } = await supabase
       .from("spending")
-      .select("*");
+      .select("*")
+      .eq("user_id", uuid);
+
+    console.log(error);
 
     return spending;
   }
