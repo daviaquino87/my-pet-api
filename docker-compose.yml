@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  mypet_databae_local:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    volumes:
+      - data:/var/lib/postgres
+    networks:
+      - mypet_network
+
+  mypet_redis_local:
+    image: redis
+    volumes:
+      - data:/var/lib/redis
+    ports:
+      - 6379:6379
+    networks:
+      - mypet_network
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  mypet_network:
+    driver: bridge
