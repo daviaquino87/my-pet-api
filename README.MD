@@ -49,19 +49,9 @@ Aplicação para gerenciamento de gastos do mês com meu pet
   DELETE /spendings/delete/:{spendingId}
 ```
 
-| Parâmetro    | Tipo    | Descrição                                  |
-| :----------- | :------ | :----------------------------------------- |
-| `spendingId` | `param` | **Obrigatório**. Id da compra a ser deleta |
+| Parâmetro | Tipo | Descrição |
 
-#### Retorna um balanço do valor compras
-
-```http
-  GET /users/balance
-```
-
-| Parâmetro | Tipo | Descrição                                        |
-| :-------- | :--- | :----------------------------------------------- |
-| - -       | - -  | **informativo**. Retorna a soma geral dos gastos |
+| - - | - - | **informativo**. Retorna a soma geral dos gastos |
 
 ## Variáveis de Ambiente
 
