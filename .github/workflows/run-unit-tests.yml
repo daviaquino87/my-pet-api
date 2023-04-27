@@ -1,6 +1,6 @@
 name: Run unit Tests
 
-on:[push]
+on: [push]
 
 jobs:
   run-unit-tests:
@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm ci
 
