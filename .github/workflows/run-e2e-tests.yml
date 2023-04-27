@@ -13,27 +13,31 @@ jobs:
         ports:
           - 5432:5432
         env:
-          - POSTGRESQL_USERNAME=docker
-          - POSTGRESQL_PASSWORD=docker
-          - POSTGRESQL_DATABASE=mypet
+          POSTGRESQL_USERNAME: docker
+          POSTGRESQL_PASSWORD: docker
+          POSTGRESQL_DATABASE: mypet
         volumes:
-          - data:/var/lib/postgres
-        
+          - data:/var/lib/postgresql/data
+
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        volumes:
+          - data:/data
+
+    env:
+      JWT_SECRET: testing
+      DATABASE_URL: postgresql://docker:docker@postgres:5432/mypet?schema=public
+
     volumes:
       data:
         driver: local
-      
-      redis:
-        image: redis
-        volumes:
-          - data:/var/lib/redis
-        ports:
-          - 6379:6379
 
-     steps:
-      - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: "npm"
@@ -41,6 +45,3 @@ jobs:
       - run: npm ci
 
       - run: npm run test:e2e
-        environment:
-          JWT_SECRET: testing
-          DATABASE_URL: "postgresql://docker:docker@localhost:5432/mypet?schema=public"
