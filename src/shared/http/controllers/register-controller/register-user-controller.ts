@@ -11,19 +11,15 @@ export class RegisterUserController {
       email: z.string().email(),
       password: z.string().min(6),
     });
-
     const { name, email, password } = registerBodySchema.parse(request.body);
-
     try {
       const registerUseCase = register();
-
-      const { user } = await registerUseCase.execute({
+      await registerUseCase.execute({
         name,
         email,
         password_hash: password,
       });
-
-      return response.status(200).send();
+      return response.status(201).send();
     } catch (error) {
       if (error instanceof InvalidEmailError) {
         return response.status(404).json({ message: error.message });
