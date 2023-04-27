@@ -9,7 +9,8 @@ export class CreateSpendingController {
       price: z.number(),
       date: z
         .string()
-        .transform((value) => (value ? new Date(value) : new Date())),
+        .transform((value) => (value ? new Date(value) : new Date()))
+        .optional(),
     });
 
     const { price, date } = createSpendingBodySchema.parse(request.body);
@@ -23,6 +24,8 @@ export class CreateSpendingController {
       user_id: id,
     });
 
-    return response.status(201).json(spending);
+    return response.status(201).json({
+      spending: spending,
+    });
   }
 }

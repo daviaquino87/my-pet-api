@@ -29,7 +29,7 @@ export class UpdateSpendingController {
         price,
       });
 
-      return response.status(203).json({
+      return response.status(200).json({
         spending: spending,
       });
     } catch (error) {

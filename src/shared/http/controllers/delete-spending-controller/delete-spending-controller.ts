@@ -24,7 +24,7 @@ export class DeleteSpendingController {
 
       await setRedis(`balance_${id}`, "");
 
-      return response.status(201).send();
+      return response.status(204).send();
     } catch (error) {
       if (error instanceof SpendingNotFoundError) {
         return response.status(404).json({ message: error.message });

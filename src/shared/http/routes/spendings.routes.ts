@@ -1,7 +1,7 @@
 import express from "express";
 
 import { CreateSpendingController } from "@/shared/http/controllers/create-spending-controller/create-spending-controller";
-import { ListSpendingsController } from "../controllers/list-spendings-controller/list-spendings-use-case";
+import { ListSpendingsController } from "../controllers/list-spendings-controller/list-spendings-controller";
 import { DeleteSpendingController } from "../controllers/delete-spending-controller/delete-spending-controller";
 import { UpdateSpendingController } from "../controllers/update-spending-controller/update-spending-controller";
 
