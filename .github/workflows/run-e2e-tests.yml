@@ -34,6 +34,6 @@ jobs:
 
       - run: npm run test:e2e
         env:
-          JWT_SECRET: testing
+          JWT_PASS: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/mypet?schema=public"
           PORT: 3000
