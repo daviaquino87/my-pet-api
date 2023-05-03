@@ -1,4 +1,4 @@
-<div align="center">
+<!-- <div align="center">
 <img src='.github/img/image.jpg' style='align:center'>
 <br>
 
@@ -107,4 +107,4 @@ Importando e instalando dependências do projeto
 
 ```bash
   npm run start:dev
-```
+``` -->
