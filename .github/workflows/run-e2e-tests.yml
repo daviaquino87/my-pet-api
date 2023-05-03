@@ -36,3 +36,4 @@ jobs:
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/mypet?schema=public"
+          PORT: 3000
