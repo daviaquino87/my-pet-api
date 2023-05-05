@@ -98,7 +98,7 @@ Importando e instalando dependências do projeto
 ```
 
 ```bash
-  sudo docker compose up
+  docker compose up
 ```
 
 ```bash
