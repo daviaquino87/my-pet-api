@@ -2,7 +2,7 @@ name: Deploy app
 on:
   push:
     branches:
-      - release/homolog
+      - realese/homolog
 
 jobs:
   deploy:
