@@ -79,7 +79,7 @@ POSTGRESQL_PASSWORD=
 
 POSTGRESQL_DATABASE=
 
-DATABASE_URL=
+DATABASE_URL="postgresql://user:passwod@localhost:5432/databasename?schema=public"
 
 ## Referência
 
