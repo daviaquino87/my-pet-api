@@ -98,7 +98,7 @@ Importando e instalando dependências do projeto
 ```
 
 ```bash
-  npm run build:setup
+  docker compose up
 ```
 
 ```bash
