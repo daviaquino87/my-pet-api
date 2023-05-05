@@ -1,0 +1,19 @@
+name: Deploy app
+on:
+  push:
+    branches:
+      - release/homolog
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+      - name: Deploy via SSH
+        run: |
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no root@${{ secrets.DOMAIN }} "cd /var/www/myPetApi && rm -rf build && git pull && npm install && pm2 restart build/shared/http/server.js"
