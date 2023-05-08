@@ -2,7 +2,6 @@ import { Spending, Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 import { SpendingRepository } from "../spendings-repository";
-import { getRedis, setRedis } from "@/lib/ioredis";
 
 export class PrismaSpendingsRepository implements SpendingRepository {
   async findSpendingByUser(id: string, user_id: string) {
@@ -42,13 +41,6 @@ export class PrismaSpendingsRepository implements SpendingRepository {
   async countBalance(userId: string) {
     let balance = 0;
 
-    const data_cache = await getRedis(`balance_${userId}`);
-
-    if (data_cache) {
-      balance = parseInt(JSON.parse(data_cache));
-      return balance;
-    }
-
     const spendings = await prisma.spending.findMany({
       where: {
         user_id: userId,
@@ -59,8 +51,6 @@ export class PrismaSpendingsRepository implements SpendingRepository {
       balance += spending.price;
     });
 
-    await setRedis(`balance_${userId}`, balance.toString());
-
     return balance;
   }
 
@@ -69,7 +59,6 @@ export class PrismaSpendingsRepository implements SpendingRepository {
       data,
     });
 
-    await setRedis(`balance_${data.user_id}`, "");
     return spending;
   }
 
@@ -81,7 +70,6 @@ export class PrismaSpendingsRepository implements SpendingRepository {
       data,
     });
 
-    await setRedis(`balance_${data.user_id}`, "");
     return spending;
   }
 
