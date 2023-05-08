@@ -14,15 +14,6 @@ services:
     networks:
       - mypet_network
 
-  mypet_redis_local:
-    image: redis
-    volumes:
-      - data:/var/lib/redis
-    ports:
-      - 6379:6379
-    networks:
-      - mypet_network
-
 volumes:
   data:
     driver: local

@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import { deleteSpending } from "@/modules/spendings/factories/make-delete-spending-use-case";
 import { SpendingNotFoundError } from "@/modules/spendings/errors/Spending-not-found-error";
-import { setRedis } from "@/lib/ioredis";
 
 export class DeleteSpendingController {
   async handle(request: Request, response: Response) {
@@ -21,8 +20,6 @@ export class DeleteSpendingController {
         id: spendingId,
         user_id: id,
       });
-
-      await setRedis(`balance_${id}`, "");
 
       return response.status(204).send();
     } catch (error) {
