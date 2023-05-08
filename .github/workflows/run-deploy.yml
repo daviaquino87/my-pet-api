@@ -18,4 +18,4 @@ jobs:
         run: npm install pm2 -g
       - name: Deploy via SSH
         run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no root@${{ secrets.DOMAIN }} "cd /var/www/myPetApi && git checkout . && rm -rf build && git pull && npm install && pm2 restart build/shared/http/server.js"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no root@${{ secrets.DOMAIN }} "cd /var/www/myPetApi && git checkout . && rm -rf build && git pull && npm install && npm run build && pm2 restart build/shared/http/server.js"

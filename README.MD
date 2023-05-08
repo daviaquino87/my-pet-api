@@ -10,6 +10,29 @@ Aplicação para gerenciamento de gastos do mês com meu pet
 
 ## Documentação da API
 
+#### Registrar um usuario
+
+```http
+  POST /register
+```
+
+| Parâmetro  | Tipo     | Descrição                         |
+| :--------- | :------- | :-------------------------------- |
+| `name`     | `string` | **Obrigatório**. Nome do usuario  |
+| `email`    | `string` | **Obrigatório**. Email do usuario |
+| `password` | `string` | **Obrigatório**. Senha do usuario |
+
+#### Login
+
+```http
+  POST /session
+```
+
+| Parâmetro  | Tipo     | Descrição                         |
+| :--------- | :------- | :-------------------------------- |
+| `email`    | `string` | **Obrigatório**. Email do usuario |
+| `password` | `string` | **Obrigatório**. Senha do usuario |
+
 #### Adiciona uma Compra
 
 ```http
