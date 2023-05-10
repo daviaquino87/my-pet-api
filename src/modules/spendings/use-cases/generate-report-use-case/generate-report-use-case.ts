@@ -2,6 +2,7 @@ import { SpendingRepository } from "../../repositories/spendings-repository";
 import { generatePdf } from "@/lib/pdfmaker";
 import { TDocumentDefinitions, TableCell } from "pdfmake/interfaces";
 import dayjs from "dayjs";
+import { formatNumberToBRLCoin } from "@/utils/format-number-to-BRL-coin";
 
 interface IGenerateReportRequest {
   userId: string;
@@ -38,7 +39,7 @@ export class GenerateReportUseCase {
     for await (let spending of userSpendingByPeriod) {
       const rows = [];
       rows.push(spending.id);
-      rows.push(`R$ ${spending.price}`);
+      rows.push(`${formatNumberToBRLCoin(spending.price)}`);
       rows.push(`${dayjs(spending.date).format("DD/MM/YYYY")}`);
 
       total += spending.price;
@@ -69,7 +70,9 @@ export class GenerateReportUseCase {
           },
         },
         {
-          columns: [{ text: `total: ${total}`, style: "total" }],
+          columns: [
+            { text: `total: ${formatNumberToBRLCoin(total)}`, style: "total" },
+          ],
         },
       ],
       styles: {
