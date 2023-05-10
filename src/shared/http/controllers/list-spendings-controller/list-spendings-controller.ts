@@ -5,11 +5,11 @@ import { listSpendings } from "@/modules/spendings/factories/make-list-spendings
 
 export class ListSpendingsController {
   async handle(request: Request, response: Response) {
-    const listSpendingBodySchema = z.object({
+    const listSpendingQuerySchema = z.object({
       page: z.string().min(1),
     });
 
-    const { page } = listSpendingBodySchema.parse(request.query);
+    const { page } = listSpendingQuerySchema.parse(request.query);
     const { id } = request.user;
 
     const listSpendingsUseCase = listSpendings();

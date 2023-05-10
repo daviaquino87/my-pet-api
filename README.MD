@@ -86,6 +86,17 @@ Aplicação para gerenciamento de gastos do mês com meu pet
 | :-------- | :--- | :----------------------------------------------- |
 | - -       | - -  | **informativo**. Retorna a soma geral dos gastos |
 
+#### Retorna um relatorio de spendings
+
+```http
+  GET /spendings/report
+```
+
+| Parâmetro     | Tipo    | Descrição                                          |
+| :------------ | :------ | :------------------------------------------------- |
+| `initialDate` | `query` | **Obrigatório**. Data inicial do periodo de compra |
+| `FinalDate`   | `query` | **Obrigatório**. Data final do periodo de compra   |
+
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env

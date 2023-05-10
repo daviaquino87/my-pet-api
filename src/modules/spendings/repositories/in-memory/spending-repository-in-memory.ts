@@ -1,6 +1,9 @@
 import { Prisma, Spending } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { SpendingRepository } from "../spendings-repository";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+dayjs.extend(isBetween);
 
 export class SpendingRepositoryInMemory implements SpendingRepository {
   public spendings: Spending[] = [];
@@ -16,6 +19,25 @@ export class SpendingRepositoryInMemory implements SpendingRepository {
     });
 
     return balance;
+  }
+
+  async searchSpendingsByPeriod(
+    userId: string,
+    initialDate: Date,
+    finalDate: Date
+  ) {
+    const spendings = this.spendings.filter((spending) => {
+      const spendingDate = dayjs(spending.date);
+      const initialDay = dayjs(initialDate);
+      const finalDay = dayjs(finalDate);
+
+      return (
+        spending.user_id === userId &&
+        spendingDate.isBetween(initialDay, finalDay, null, "[]")
+      );
+    });
+
+    return spendings;
   }
 
   async findSpendingByUser(id: string, user_id: string) {
