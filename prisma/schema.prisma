@@ -17,7 +17,7 @@ model User {
   password_hash String
   created_at DateTime @default(now())
 
-  spending Spending[]
+  spending Spending[] 
   
   @@map("users")
 }
@@ -28,8 +28,9 @@ model Spending {
   date DateTime @default(now())
   created_at DateTime @default(now())
 
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
+  
 
   @@map("spendings")
 }

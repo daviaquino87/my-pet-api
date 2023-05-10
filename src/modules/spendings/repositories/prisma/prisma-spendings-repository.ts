@@ -2,6 +2,7 @@ import { Spending, Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 import { SpendingRepository } from "../spendings-repository";
+import dayjs from "dayjs";
 
 export class PrismaSpendingsRepository implements SpendingRepository {
   async findSpendingByUser(id: string, user_id: string) {
@@ -13,6 +14,27 @@ export class PrismaSpendingsRepository implements SpendingRepository {
     });
 
     return spending;
+  }
+
+  async searchSpendingsByPeriod(
+    userId: string,
+    initialDate: Date,
+    finalDate: Date
+  ) {
+    const startOfTheDay = dayjs(initialDate).startOf("date");
+    const endOfTheDay = dayjs(finalDate).endOf("date");
+
+    const spendings = await prisma.spending.findMany({
+      where: {
+        user_id: userId,
+        date: {
+          gte: startOfTheDay.toDate(),
+          lte: endOfTheDay.toDate(),
+        },
+      },
+    });
+
+    return spendings;
   }
 
   async findById(id: string) {

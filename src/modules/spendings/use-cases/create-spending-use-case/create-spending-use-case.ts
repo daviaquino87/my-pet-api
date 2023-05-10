@@ -17,7 +17,7 @@ export class CreateSpendingUseCase {
     const spending = await this.spendingRepository.create({
       price,
       user_id,
-      date,
+      date: date ?? new Date(),
     });
 
     return {
