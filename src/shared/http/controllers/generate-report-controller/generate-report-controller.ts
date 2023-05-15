@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 
-import { listSpendings } from "@/modules/spendings/factories/make-list-spendings-use-case";
 import { generateReport } from "@/modules/spendings/factories/make-generate-report-use-case";
-
 export class GenerateReportController {
   async handle(request: Request, response: Response) {
     const generateReportQuerySchema = z.object({
@@ -29,6 +27,6 @@ export class GenerateReportController {
     });
 
     response.setHeader("Content-Type", "application/pdf");
-    response.send(spendingPdf);
+    response.end(spendingPdf);
   }
 }
