@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SpendingRepository } from "../../repositories/spendings-repository";
 import { GenerateReportUseCase } from "./generate-report-use-case";
 import { SpendingRepositoryInMemory } from "../../repositories/in-memory/spending-repository-in-memory";
+import { InvalidPeriodByReportError } from "../../errors/Invalid-period-by-report-error";
 
 let spendingsRepository: SpendingRepository;
 let sut: GenerateReportUseCase;
@@ -54,5 +55,15 @@ describe("Generate report", () => {
 
     expect(spendingPdf).toEqual(expect.any(Buffer));
     expect(spendings).toHaveLength(3);
-  }, 10000);
+  }, 30000);
+
+  it("It should not be possible to generate a pdf in an empty period", async () => {
+    await expect(() =>
+      sut.execute({
+        userId: "example-user-id",
+        initialDate: new Date("2022-01-20 08:00:00"),
+        finalDate: new Date("2022-01-26 08:00:00"),
+      })
+    ).rejects.toBeInstanceOf(InvalidPeriodByReportError);
+  });
 });

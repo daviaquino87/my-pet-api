@@ -3,6 +3,7 @@ import { generatePdfFromHtml } from "@/lib/pdfHtml";
 
 import dayjs from "dayjs";
 import { formatNumberToBRLCoin } from "@/utils/format-number-to-BRL-coin";
+import { InvalidPeriodByReportError } from "../../errors/Invalid-period-by-report-error";
 
 interface IGenerateReportRequest {
   userId: string;
@@ -29,6 +30,10 @@ export class GenerateReportUseCase {
         finalDate
       );
 
+    if (userSpendingByPeriod.length < 1) {
+      throw new InvalidPeriodByReportError();
+    }
+
     const periodByAddMessage = `${dayjs(initialDate).format(
       "DD/MM/YYYY"
     )} a ${dayjs(finalDate).format("DD/MM/YYYY")}`;
@@ -51,7 +56,7 @@ export class GenerateReportUseCase {
     const buffer = await generatePdfFromHtml({
       spendings: bodyByDocumentDefinition,
       period: periodByAddMessage,
-      total: total.toFixed(2),
+      total: "R$ " + total.toFixed(2),
     });
 
     return {
