@@ -16,7 +16,10 @@ export async function generatePdfFromHtml({
   period,
   spendings,
 }: IGeneratePdf): Promise<Buffer> {
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox"],
+  });
   const page = await browser.newPage();
 
   const templatePath = path.resolve(
