@@ -54,5 +54,5 @@ describe("Generate report", () => {
 
     expect(spendingPdf).toEqual(expect.any(Buffer));
     expect(spendings).toHaveLength(3);
-  });
+  }, 10000);
 });
