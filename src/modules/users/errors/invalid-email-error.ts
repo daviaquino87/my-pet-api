@@ -1,6 +1,6 @@
 export class InvalidEmailError extends Error {
   constructor() {
     super();
-    this.message = "Invalid Email.";
+    this.message = "Email inválido.";
   }
 }
