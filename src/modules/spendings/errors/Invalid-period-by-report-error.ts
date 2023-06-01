@@ -1,6 +1,6 @@
 export class InvalidPeriodByReportError extends Error {
   constructor() {
     super();
-    this.message = "Expenses not found for the selected period.";
+    this.message = "Despesas não encontradas para o período selecionado.";;
   }
 }
