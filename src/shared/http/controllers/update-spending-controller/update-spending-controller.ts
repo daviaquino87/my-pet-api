@@ -7,7 +7,8 @@ export class UpdateSpendingController {
   async handle(request: Request, response: Response) {
     const updateSpendingBodySchema = z.object({
       price: z.number().optional(),
-      date: z.date().optional(),
+      date: z..string()
+        .transform((value) => (value ? new Date(value)).optional(),
     });
 
     const { price, date } = updateSpendingBodySchema.parse(request.body);
