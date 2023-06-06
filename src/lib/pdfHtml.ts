@@ -17,7 +17,7 @@ export async function generatePdfFromHtml({
   spendings,
 }: IGeneratePdf): Promise<Buffer> {
   const browser = await puppeteer.launch({
-    headless: "new",
+    headless: "true",
     args: ["--no-sandbox"],
   });
   const page = await browser.newPage();
@@ -53,13 +53,12 @@ export async function generatePdfFromHtml({
         },
       });
 
-      await browser.close();
-
       resolve(buffer);
     } catch (error) {
       console.log(error);
-      await browser.close();
       reject(new FailedToGenerateHtmlError());
+    }finally {
+      await browser.close();
     }
   });
 }
