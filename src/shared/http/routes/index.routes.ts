@@ -1,10 +1,8 @@
 import express from "express";
 
-import { usersRoutes } from "./user.routes";
 import { authenticateRoutes } from "./authenticate.routes";
 import { spendingsRoutes } from "./spendings.routes";
-
-import { generatePdf } from "@/lib/pdfmaker";
+import { usersRoutes } from "./user.routes";
 
 export const indexRoutes = express();
 

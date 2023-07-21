@@ -1,22 +1,39 @@
-version: "3"
+version: "3.8"
 
 services:
-  mypet_databae_local:
-    image: bitnami/postgresql
+  mypet_application:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: mypet_application
     ports:
-      - 5432:5432
-    environment:
-      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+      - "3001:3000"
     volumes:
-      - data:/var/lib/postgres
+      - .:/usr/app
+    networks:
+      - mypet_network
+    depends_on:
+      - mypet_database_local
+      - gotenberg
+
+  mypet_database_local:
+    image: .docker/postgres
+    container_name: mypet_database_local
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
     networks:
       - mypet_network
 
-volumes:
-  data:
-    driver: local
+  gotenberg:
+    image: gotenberg/gotenberg:7
+    container_name: gotenberg
+    ports:
+      - "3000:3000"
+    networks:
+      - mypet_network
 
 networks:
   mypet_network:

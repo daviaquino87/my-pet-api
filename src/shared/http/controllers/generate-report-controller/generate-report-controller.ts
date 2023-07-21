@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 
-import { generateReport } from "@/modules/spendings/factories/make-generate-report-use-case";
-import { InvalidPeriodByReportError } from "@/modules/spendings/errors/Invalid-period-by-report-error";
 import { FailedToGenerateHtmlError } from "@/lib/errors/failed-to-generate-html-error";
+import { InvalidPeriodByReportError } from "@/modules/spendings/errors/Invalid-period-by-report-error";
+import { generateReport } from "@/modules/spendings/factories/make-generate-report-use-case";
 export class GenerateReportController {
   async handle(request: Request, response: Response) {
     const generateReportQuerySchema = z.object({
@@ -30,6 +30,7 @@ export class GenerateReportController {
       });
 
       response.setHeader("Content-Type", "application/pdf");
+
       return response.end(spendingPdf);
     } catch (error) {
       if (

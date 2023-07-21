@@ -1,8 +1,10 @@
 import { User } from "@prisma/client";
 import { compare } from "bcryptjs";
 
-import { UserRepository } from "@/modules/users/repositories/user-repository";
 import { InvalidCredentialsError } from "@/modules/users/errors/invalid-cretential-error";
+import { UserRepository } from "@/modules/users/repositories/user-repository";
+
+import { PendingValidationError } from "../../errors/pending-validation-error";
 
 interface IAuthenticateUserUseCaseRequest {
   email: string;
@@ -24,6 +26,10 @@ export class AuthenticateUserUseCase {
 
     if (!user) {
       throw new InvalidCredentialsError();
+    }
+
+    if (!user.validated_at) {
+      throw new PendingValidationError();
     }
 
     const doesPasswordMatches = await compare(password, user.password_hash);

@@ -12,7 +12,6 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        height: 100vh;
       }
       .header {
         display: flex;
@@ -47,8 +46,9 @@
       th {
         background-color: orange;
         color: white;
+        border: 1px solid black;
+        padding: 8px;
       }
-      th,
       td {
         border: 1px solid black;
         padding: 8px;
@@ -88,13 +88,13 @@
           </tr>
         </thead>
         <tbody>
-          <% spendings.forEach(spending => {%>
+          <% spendings.forEach(spending => { %>
           <tr>
             <td><%= spending.id %></td>
             <td><%= spending.price %></td>
             <td><%= spending.date %></td>
           </tr>
-          <%})%>
+          <% }) %>
         </tbody>
       </table>
       <div class="total"><b>Total:</b> <%= total %></div>

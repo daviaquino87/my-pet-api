@@ -1,6 +1,5 @@
-import path from "node:path";
-
 import ejs from "ejs";
+import path from "node:path";
 import puppeteer from "puppeteer";
 
 import { FailedToGenerateHtmlError } from "./errors/failed-to-generate-html-error";
@@ -17,7 +16,6 @@ export async function generatePdfFromHtml({
   spendings,
 }: IGeneratePdf): Promise<Buffer> {
   const browser = await puppeteer.launch({
-    headless: true,
     args: ["--no-sandbox"],
   });
   const page = await browser.newPage();
@@ -57,7 +55,7 @@ export async function generatePdfFromHtml({
     } catch (error) {
       console.log(error);
       reject(new FailedToGenerateHtmlError());
-    }finally {
+    } finally {
       await browser.close();
     }
   });

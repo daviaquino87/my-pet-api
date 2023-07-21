@@ -133,6 +133,7 @@ dist
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
+.docker/dbdata
 
 # Optional stylelint cache
 
