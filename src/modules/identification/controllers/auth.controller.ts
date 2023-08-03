@@ -1,11 +1,13 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
-import { AuthUserInputDto } from '../dtos/input/auth-user.input.dto';
-import { ValidateUserInputDto } from '../dtos/input/validate-user.input.dto';
-import { AuthUserOutputDto } from '../dtos/output/auth-user.output';
-import { AuthUserUseCase } from '../use-cases/auth-user/auth-user.usecase';
-import { ValidateUserUseCase } from '../use-cases/validate-user/validate-user.usecase';
+import { AuthUserInputDto } from '@/modules/identification/dtos/input/auth-user.input.dto';
+import { ValidateUserInputDto } from '@/modules/identification/dtos/input/validate-user.input.dto';
+import { AuthUserOutputDto } from '@/modules/identification/dtos/output/auth-user.output';
+import { AuthUserUseCase } from '@/modules/identification/use-cases/auth-user/auth-user.usecase';
+import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(

@@ -6,6 +6,7 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { RoutePublic } from '@/modules/common/decorators/route-public.decorator';
 import { CreateUserInputDto } from '@/modules/identification/dtos/input/create-user.input.dto';
@@ -16,6 +17,7 @@ import { CreateUserUseCase } from '@/modules/identification/use-cases/create-use
 import { SendRegisterEmailUseCase } from '@/modules/identification/use-cases/send-register-email/send-register-email.usecase';
 import { generateRandomCode } from '@/modules/identification/utils/generate-random-code';
 
+@ApiTags('Users')
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
