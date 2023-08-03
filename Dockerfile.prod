@@ -1,0 +1,30 @@
+FROM node:18-alpine as builder
+
+ENV NODE_ENV build
+
+WORKDIR /home/node/app
+
+COPY . .
+RUN npm ci && npm run build && npm prune --production
+
+######## Start a new stage from scratch ####### 
+FROM node:18-alpine
+
+ENV NODE_ENV production
+ENV TZ America/Fortaleza
+
+WORKDIR /home/node/app
+
+# Copy the Pre-built binary file from the previous stage
+COPY --from=builder /home/node/app/dist ./dist
+COPY --from=builder /home/node/app/package.json .
+COPY --from=builder /home/node/app/package-lock.json .
+COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
+
+RUN apk add --no-cache ca-certificates tzdata
+
+USER node
+
+# Command to run the executable
+CMD [ "node", "dist/main" ]
+
