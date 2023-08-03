@@ -1,11 +1,12 @@
-FROM node:lts-alpine
+FROM node:18-alpine
 
-WORKDIR /usr/app
+WORKDIR /home/node/app
 
-COPY package*.json ./
+ENV NODE_ENV development
+ENV TZ America/Fortaleza
 
-RUN npm install
+RUN npm install -g @nestjs/cli
+RUN apk add --no-cache tzdata
 
-COPY . .
+CMD [ "npm", "run", "start:dev" ]
 
-EXPOSE 3001
