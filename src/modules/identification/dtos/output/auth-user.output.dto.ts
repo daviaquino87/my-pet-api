@@ -4,5 +4,6 @@ export class AuthUserOutputDto {
     name: string;
     email: string;
   };
+
   accessToken: string;
 }

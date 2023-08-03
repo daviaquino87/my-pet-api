@@ -26,8 +26,8 @@ export class UsersController {
     private readonly sendRegisterEmailUseCase: SendRegisterEmailUseCase,
   ) {}
 
-  @Post()
   @RoutePublic()
+  @Post()
   async create(
     @Body() createUserInputDto: CreateUserInputDto,
   ): Promise<UserOutputDto> {
@@ -47,7 +47,7 @@ export class UsersController {
   }
 
   @Get('me')
-  async userData(@Request() request: ICustomRequest) {
+  async userData(@Request() request: ICustomRequest): Promise<UserOutputDto> {
     return request.user;
   }
 }

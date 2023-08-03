@@ -6,7 +6,7 @@ import { ApiBadRequest } from '@/modules/common/exceptions/exceptions';
 import { validateDTO } from '@/modules/common/utils/validateDto';
 import { authConfig } from '@/modules/identification/constants';
 import { AuthUserInputDto } from '@/modules/identification/dtos/input/auth-user.input.dto';
-import { AuthUserOutputDto } from '@/modules/identification/dtos/output/auth-user.output';
+import { AuthUserOutputDto } from '@/modules/identification/dtos/output/auth-user.output.dto';
 import { AbstractUsersRepository } from '@/modules/identification/repositories/abstract.users.repository';
 
 interface IAuthUserUseCaseInput {

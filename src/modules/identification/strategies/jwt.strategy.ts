@@ -31,6 +31,8 @@ export class JWTAuthStrategy extends PassportStrategy(
       id: userAuth.id,
       name: userAuth.name,
       email: userAuth.email,
+      validateAt: userAuth.validateAt,
+      createdAt: userAuth.createdAt,
     };
   }
 }
