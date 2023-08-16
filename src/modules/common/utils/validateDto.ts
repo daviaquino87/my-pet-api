@@ -20,10 +20,7 @@ const getMessageError = (errors: ValidationError[]): string => {
   return messageError;
 };
 
-export const validateDTO = async <T>(
-  DTOClass: DTOType<T>,
-  dtoObject: T,
-): Promise<BadRequestException | void> => {
+export const validateDTO = async <T>(DTOClass: DTOType<T>, dtoObject: T): Promise<BadRequestException | void> => {
   const dto = plainToInstance(DTOClass, dtoObject);
 
   const errors = await validate(dto as object, {
