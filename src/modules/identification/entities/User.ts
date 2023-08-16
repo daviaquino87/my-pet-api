@@ -7,7 +7,6 @@ export class User implements IUserProps {
   name = '';
   email = '';
   passwordHash = '';
-  accessCodeHash = '';
   validateAt = null;
   createdAt = new Date();
 

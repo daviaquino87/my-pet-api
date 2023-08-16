@@ -5,7 +5,6 @@ test('Create new instance of user [entity]', () => {
     name: 'john Due',
     email: 'john@due.email.com',
     passwordHash: 'passwordHash',
-    accessCodeHash: 'accessCodeHash',
   });
 
   expect(user).toHaveProperty('id');

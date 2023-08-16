@@ -8,8 +8,6 @@ import { CreateUserUseCase } from '@/modules/identification/use-cases/create-use
 let usersRepository: UsersRepository;
 let sut: CreateUserUseCase;
 
-const code = '12345';
-
 describe('Create user [usecase]', () => {
   beforeEach(() => {
     usersRepository = new UsersRepository();
@@ -26,7 +24,6 @@ describe('Create user [usecase]', () => {
     await expect(() =>
       sut.execute({
         createUserInputDto: invalidNameCase,
-        code,
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
@@ -39,7 +36,6 @@ describe('Create user [usecase]', () => {
     await expect(() =>
       sut.execute({
         createUserInputDto: invalidLengthNameCase,
-        code,
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
@@ -52,7 +48,6 @@ describe('Create user [usecase]', () => {
     await expect(() =>
       sut.execute({
         createUserInputDto: invalidEmailCase,
-        code,
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
@@ -65,7 +60,6 @@ describe('Create user [usecase]', () => {
     await expect(() =>
       sut.execute({
         createUserInputDto: invalidPasswordCase,
-        code,
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
@@ -78,7 +72,6 @@ describe('Create user [usecase]', () => {
     await expect(() =>
       sut.execute({
         createUserInputDto: invalidCharacterPasswordCase,
-        code,
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
   });
@@ -89,7 +82,6 @@ describe('Create user [usecase]', () => {
       name: 'example-user-name',
       email: 'example@email.com',
       passwordHash: 'example-hash-password',
-      accessCodeHash: 'example-hash-code',
       validateAt: null,
       createdAt: new Date(),
     });
@@ -101,7 +93,6 @@ describe('Create user [usecase]', () => {
           email: 'example@email.com',
           password: 'example-hash-password',
         },
-        code,
       }),
     ).rejects.toBeInstanceOf(ApiConflict);
   });
@@ -113,7 +104,6 @@ describe('Create user [usecase]', () => {
         email: 'john@email.com',
         password: '123456',
       },
-      code,
     });
 
     const userDto = new UserOutputDto();

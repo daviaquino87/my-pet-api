@@ -26,7 +26,6 @@ describe('Auth user [usecase]', () => {
       name: 'John',
       email: 'JohnDue@email.com',
       passwordHash: await hash('1234567', env.PASSWORD_SALTS),
-      accessCodeHash: await hash('1234', env.ACCESS_CODE_SALTS),
       validateAt: null,
       createdAt: new Date(),
     });

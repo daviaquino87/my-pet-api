@@ -2,14 +2,13 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { AuthController } from '@/modules/identification/controllers/auth.controller';
-import { UsersController } from '@/modules/identification/controllers/users.controller';
+import { AccountController } from '@/modules/identification/controllers/account.controller';
 import { AbstractUsersRepository } from '@/modules/identification/repositories/abstract.users.repository';
 import { UsersRepository } from '@/modules/identification/repositories/in-memory/users.repository';
 import { JWTAuthStrategy } from '@/modules/identification/strategies/jwt.strategy';
 import { AuthUserUseCase } from '@/modules/identification/use-cases/auth-user/auth-user.usecase';
 import { CreateUserUseCase } from '@/modules/identification/use-cases/create-user/create-user.usecase';
-import { SendRegisterEmailUseCase } from '@/modules/identification/use-cases/send-register-email/send-register-email.usecase';
+import { SendEmailToValidateUserAccountUseCase } from '@/modules/identification/use-cases/send-email-to-validate-user-account/send-email-to-validate-user-account.usecase';
 import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
 @Module({
@@ -18,13 +17,13 @@ import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate
     CreateUserUseCase,
     ValidateUserUseCase,
     AuthUserUseCase,
-    SendRegisterEmailUseCase,
+    SendEmailToValidateUserAccountUseCase,
     JWTAuthStrategy,
     {
       provide: AbstractUsersRepository,
       useClass: UsersRepository,
     },
   ],
-  controllers: [UsersController, AuthController],
+  controllers: [AccountController],
 })
 export class IdentificationModule {}

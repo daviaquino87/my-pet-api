@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 import { ApiBadRequest } from '@/modules/common/exceptions/exceptions';
 import { validateDTO } from '@/modules/common/utils/validateDto';
@@ -12,30 +12,28 @@ interface IValidateUserUseCaseInput {
   validateUserInputDto: ValidateUserInputDto;
 }
 
+interface JwtPayload {
+  email: string;
+}
+
 @Injectable()
 export class ValidateUserUseCase {
-  constructor(private readonly userRepository: AbstractUsersRepository) {}
+  constructor(private readonly userRepository: AbstractUsersRepository, private readonly jwtService: JwtService) {}
 
-  async execute({
-    validateUserInputDto,
-  }: IValidateUserUseCaseInput): Promise<void> {
+  async execute({ validateUserInputDto }: IValidateUserUseCaseInput): Promise<void> {
     await validateDTO(ValidateUserInputDto, validateUserInputDto);
 
-    const user = await this.userRepository.findUserByEmail({
-      email: validateUserInputDto.email,
-    });
+    const decodedToken = await this.jwtService.verify(validateUserInputDto.code, { secret: 'sendEmailJwt' });
+    if (Date.now() >= decodedToken.exp * 1000) {
+      throw new Error('O token de validação expirou');
+    }
+
+    const jwtPayload = this.jwtService.decode(validateUserInputDto.code) as JwtPayload;
+
+    const user = await this.userRepository.findUserByEmail({ email: jwtPayload.email });
 
     if (!user) {
       throw new ApiBadRequest('O usuário informado não foi encontrado');
-    }
-
-    const codeMaths = await compare(
-      validateUserInputDto.code,
-      user.accessCodeHash,
-    );
-
-    if (!codeMaths) {
-      throw new ApiBadRequest('Código informado invalido');
     }
 
     const userValidated = new User(user);

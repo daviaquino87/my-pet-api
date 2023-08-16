@@ -1,8 +1,5 @@
 import { IDeleteSpending } from '@/modules/spendings/interfaces/delete-spending.interface';
-import {
-  IFindOneSpending,
-  IFindSpending,
-} from '@/modules/spendings/interfaces/find-users.interface';
+import { IFindOneSpending, IFindSpending } from '@/modules/spendings/interfaces/find-spending.interface';
 import { ISpendingProps } from '@/modules/spendings/interfaces/spending-props.interface';
 
 export abstract class AbstractSpendingsRepository {

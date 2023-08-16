@@ -11,7 +11,6 @@ import { AbstractUsersRepository } from '@/modules/identification/repositories/a
 
 interface ICreateUserUseCaseInput {
   createUserInputDto: CreateUserInputDto;
-  code: string;
 }
 
 interface ICreateUserUseCaseOutput {
@@ -22,10 +21,7 @@ interface ICreateUserUseCaseOutput {
 export class CreateUserUseCase {
   constructor(private readonly userRepository: AbstractUsersRepository) {}
 
-  async execute({
-    createUserInputDto,
-    code,
-  }: ICreateUserUseCaseInput): Promise<ICreateUserUseCaseOutput> {
+  async execute({ createUserInputDto }: ICreateUserUseCaseInput): Promise<ICreateUserUseCaseOutput> {
     await validateDTO(CreateUserInputDto, createUserInputDto);
 
     const userAlreadyExists = await this.userRepository.findUserByEmail({
@@ -36,18 +32,12 @@ export class CreateUserUseCase {
       throw new ApiConflict('O email informado pertence a um usuário valido');
     }
 
-    const passwordHash = await hash(
-      createUserInputDto.password,
-      env.PASSWORD_SALTS,
-    );
-
-    const accessCodeHash = await hash(code.toString(), env.ACCESS_CODE_SALTS);
+    const passwordHash = await hash(createUserInputDto.password, env.PASSWORD_SALTS);
 
     const user = new User({
       name: createUserInputDto.name,
       email: createUserInputDto.email,
       passwordHash,
-      accessCodeHash,
     });
 
     await this.userRepository.create(user);

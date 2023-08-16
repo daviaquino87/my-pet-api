@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Código de Primeiro Acesso</title>
+    <title>Validação de Primeiro Acesso</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -35,15 +35,19 @@
       .content p {
         margin: 10px 0;
       }
-      .content .code {
-        font-size: 18px;
-        font-weight: bold;
-        background-color: #f9f9f9;
-        padding: 10px;
-        border-radius: 5px;
+      .content .button-container {
         text-align: center;
-        font-family: monospace; /* Use a monospaced font */
-        letter-spacing: 10px; /* Adjust letter spacing as needed */
+        margin-top: 20px;
+      }
+      .button-container .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #2a6eb8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
       }
 
       .footer {
@@ -59,27 +63,24 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>Mypet Primeiro Acesso</h1>
+        <h1>Mypet Validação de Primeiro Acesso</h1>
       </div>
       <div class="content">
         <p>Bem-vindo(a) ao nosso sistema!</p>
         <p>
-          Você está prestes a acessar sua conta pela primeira vez. Para garantir
-          a segurança do processo, solicitamos que insira o código de primeiro
-          acesso abaixo:
+          Você está prestes a acessar sua conta pela primeira vez. Para garantir a segurança do processo, solicitamos
+          que clique no botão abaixo para validar sua conta:
         </p>
-        <p class="code"><%= code %></p>
-        <p>
-          Por favor, copie o código acima e insira-o na página de primeiro
-          acesso. Certifique-se de não compartilhar esse código com ninguém,
-          pois ele é exclusivo para sua conta.
-        </p>
+        <div class="button-container">
+          <a class="button" href="<%= code %>">Clique aqui</a>
+        </div>
+        <p>Após acessar o link, sua conta estará disponível para login.</p>
 
         <p>Atenciosamente,</p>
         <p>Equipe de My Pet</p>
       </div>
       <div class="footer">
-        <p>Este é um e-mail automático, por favor não responda.</p>
+        <p>Este é um e-mail automático. Por favor, não responda.</p>
       </div>
     </div>
   </body>

@@ -9,10 +9,7 @@ import { IPayloadAccessToken } from '@/modules/identification/interfaces/payload
 import { AbstractUsersRepository } from '@/modules/identification/repositories/abstract.users.repository';
 
 @Injectable()
-export class JWTAuthStrategy extends PassportStrategy(
-  Strategy,
-  authConfig.STRATEGY_NAME,
-) {
+export class JWTAuthStrategy extends PassportStrategy(Strategy, authConfig.STRATEGY_NAME) {
   constructor(private readonly userRepository: AbstractUsersRepository) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

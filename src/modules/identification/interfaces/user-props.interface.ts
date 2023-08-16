@@ -3,7 +3,6 @@ export interface IUserProps {
   name: string;
   email: string;
   passwordHash: string;
-  accessCodeHash: string;
   validateAt?: Date;
   createdAt?: Date;
 }
