@@ -10,17 +10,17 @@ import { AuthUserInputDto } from '@/modules/identification/dtos/input/auth-user.
 import { ValidateUserInputDto } from '@/modules/identification/dtos/input/validate-user.input.dto';
 import { AuthUserOutputDto } from '@/modules/identification/dtos/output/auth-user.output.dto';
 import { AuthUserUseCase } from '@/modules/identification/use-cases/auth-user/auth-user.usecase';
-import { SendEmailToValidateUserAccountUseCase } from '@/modules/identification/use-cases/send-email-to-validate-user-account/send-email-to-validate-user-account.usecase';
 import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
 import { ICustomRequest } from '../interfaces/custom-request.interface';
+import { SendEmailToValidateUserAccountQueue } from '../queues/send-email-to-validate-user-account.queue';
 
 @ApiTags('Account')
 @Controller('account')
 export class AccountController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
-    private readonly sendEmailToValidateUserAccountUseCase: SendEmailToValidateUserAccountUseCase,
+    private readonly sendEmailToValidateUserAccountQueue: SendEmailToValidateUserAccountQueue,
     private readonly authUserUseCase: AuthUserUseCase,
     private readonly validateUserUseCase: ValidateUserUseCase,
   ) {}
@@ -32,8 +32,8 @@ export class AccountController {
       createUserInputDto,
     });
 
-    await this.sendEmailToValidateUserAccountUseCase.execute({
-      recipient: user.email,
+    await this.sendEmailToValidateUserAccountQueue.producerEmailsToQueue({
+      email: user.email,
     });
 
     return user;

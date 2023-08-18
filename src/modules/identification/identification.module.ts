@@ -11,6 +11,8 @@ import { CreateUserUseCase } from '@/modules/identification/use-cases/create-use
 import { SendEmailToValidateUserAccountUseCase } from '@/modules/identification/use-cases/send-email-to-validate-user-account/send-email-to-validate-user-account.usecase';
 import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
+import { SendEmailToValidateUserAccountQueue } from './queues/send-email-to-validate-user-account.queue';
+
 @Module({
   imports: [JwtModule.register({}), PassportModule],
   providers: [
@@ -23,6 +25,7 @@ import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate
       provide: AbstractUsersRepository,
       useClass: UsersRepository,
     },
+    SendEmailToValidateUserAccountQueue,
   ],
   controllers: [AccountController],
 })

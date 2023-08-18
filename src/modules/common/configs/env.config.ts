@@ -18,6 +18,8 @@ const envSchema = z.object({
   NODEMAILER_PORT: z.coerce.number(),
   NODEMAILER_USER: z.string(),
   NODEMAILER_PASS: z.string(),
+
+  AMQP_URL_CONNECTION: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);

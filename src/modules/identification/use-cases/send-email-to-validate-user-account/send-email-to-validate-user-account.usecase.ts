@@ -29,7 +29,7 @@ export class SendEmailToValidateUserAccountUseCase {
     );
 
     const html = await renderFile(pathToTemplate, {
-      code: `${host}/account/validate-email?code=${accessToken}`,
+      code: `${host}/account/validate-email?token=${accessToken}`,
     });
 
     await this.emailService.sendEmail({
