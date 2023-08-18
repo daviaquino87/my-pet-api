@@ -1,6 +1,4 @@
-<div style="display: flex; justify-content: center; align-items: center;">
-  <img src="https://raw.githubusercontent.com/daviaquino87/my-pet-api/realese/homolog/.github/img/image.jpg" alt="Logo">
-</div>
+
 
 
 # MYPET
@@ -54,6 +52,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Gotenberg](https://gotenberg.dev/)
 - [prismaOrm](https://www.prisma.io/docs)
 - [Nodemailer](https://nodemailer.com/about/)
+- [RabbitMq](https://www.rabbitmq.com/documentation.html)
+
 
 
 <hr>

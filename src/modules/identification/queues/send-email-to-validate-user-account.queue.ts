@@ -26,10 +26,14 @@ export class SendEmailToValidateUserAccountQueue {
     queue: rabbitMqConfig.VALIDATE_ACCOUNT_EMAIL_QUEUE,
   })
   async consumerEmailsToQueue(event: ISendValidateAccountEmailToQueue): Promise<boolean> {
-    await this.sendEmailToValidateUserAccountUseCase.execute({
-      recipient: event.email,
-    });
+    try {
+      await this.sendEmailToValidateUserAccountUseCase.execute({
+        recipient: event.email,
+      });
 
-    return true;
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

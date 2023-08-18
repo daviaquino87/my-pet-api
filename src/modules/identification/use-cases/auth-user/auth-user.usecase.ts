@@ -17,14 +17,9 @@ type IAuthUserUseCaseOutput = AuthUserOutputDto;
 
 @Injectable()
 export class AuthUserUseCase {
-  constructor(
-    private readonly userRepository: AbstractUsersRepository,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private readonly userRepository: AbstractUsersRepository, private jwtService: JwtService) {}
 
-  async execute({
-    authUserInputDto,
-  }: IAuthUserUseCaseInput): Promise<IAuthUserUseCaseOutput> {
+  async execute({ authUserInputDto }: IAuthUserUseCaseInput): Promise<IAuthUserUseCaseOutput> {
     await validateDTO(AuthUserInputDto, authUserInputDto);
 
     const user = await this.userRepository.findUserByEmail({
@@ -35,10 +30,7 @@ export class AuthUserUseCase {
       throw new ApiBadRequest('Email ou senha inválidos');
     }
 
-    const passwordMaths = await compare(
-      authUserInputDto.password,
-      user.passwordHash,
-    );
+    const passwordMaths = await compare(authUserInputDto.password, user.passwordHash);
 
     if (!passwordMaths) {
       throw new ApiBadRequest('Email ou senha inválidos');

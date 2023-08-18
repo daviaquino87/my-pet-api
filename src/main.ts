@@ -10,6 +10,7 @@ function enableDocumentation(app: INestApplication) {
     .setTitle('my-pet')
     .setDescription('Financial control with you pet')
     .setVersion('0.0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

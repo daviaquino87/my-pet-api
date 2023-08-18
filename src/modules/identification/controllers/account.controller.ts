@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, Redirect, Request } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { env } from '@/modules/common/configs/env.config';
 import { RoutePublic } from '@/modules/common/decorators/route-public.decorator';
@@ -9,13 +9,13 @@ import { CreateUserUseCase } from '@/modules/identification//use-cases/create-us
 import { AuthUserInputDto } from '@/modules/identification/dtos/input/auth-user.input.dto';
 import { ValidateUserInputDto } from '@/modules/identification/dtos/input/validate-user.input.dto';
 import { AuthUserOutputDto } from '@/modules/identification/dtos/output/auth-user.output.dto';
+import { ICustomRequest } from '@/modules/identification/interfaces/custom-request.interface';
+import { SendEmailToValidateUserAccountQueue } from '@/modules/identification/queues/send-email-to-validate-user-account.queue';
 import { AuthUserUseCase } from '@/modules/identification/use-cases/auth-user/auth-user.usecase';
 import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
-import { ICustomRequest } from '../interfaces/custom-request.interface';
-import { SendEmailToValidateUserAccountQueue } from '../queues/send-email-to-validate-user-account.queue';
-
 @ApiTags('Account')
+@ApiBearerAuth()
 @Controller('account')
 export class AccountController {
   constructor(
