@@ -14,6 +14,7 @@ interface IValidateUserUseCaseInput {
 
 interface JwtPayload {
   email: string;
+  exp: string;
 }
 
 @Injectable()

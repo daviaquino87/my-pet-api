@@ -19,7 +19,6 @@ export class JWTAuthStrategy extends PassportStrategy(Strategy, authConfig.STRAT
 
   async validate({ email }: IPayloadAccessToken): Promise<IAuthenticatedUser> {
     const userAuth = await this.userRepository.findUserByEmail({ email });
-
     if (!userAuth || !userAuth.validateAt) {
       throw new ApiUnauthorized('Usuário não autorizado');
     }

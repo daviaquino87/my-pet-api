@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query, Redirect, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
 import { env } from '@/modules/common/configs/env.config';
 import { RoutePublic } from '@/modules/common/decorators/route-public.decorator';
@@ -14,6 +15,9 @@ import { SendEmailToValidateUserAccountQueue } from '@/modules/identification/qu
 import { AuthUserUseCase } from '@/modules/identification/use-cases/auth-user/auth-user.usecase';
 import { ValidateUserUseCase } from '@/modules/identification/use-cases/validate-user/validate-user.usecase';
 
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @ApiTags('Account')
 @ApiBearerAuth()
 @Controller('account')
@@ -39,12 +43,14 @@ export class AccountController {
     return user;
   }
 
+  @RoutePublic()
   @Get('validate-email')
-  @Redirect(env.REDIRECT_FRONT_HOST, 301)
-  async validateEmail(@Query() validateUserInputDto: ValidateUserInputDto): Promise<void> {
+  async validateEmail(@Query() validateUserInputDto: ValidateUserInputDto, @Res() res: Response): Promise<any> {
     await this.validateUserUseCase.execute({
       validateUserInputDto,
     });
+
+    res.redirect(301, env.REDIRECT_FRONT_HOST);
   }
 
   @Post('login')
